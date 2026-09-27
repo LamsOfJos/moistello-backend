@@ -643,7 +643,7 @@ func (c *Config) ValidateSecrets() error {
 		{"Security.EncryptionKey", c.Security.EncryptionKey},
 		{"Stellar.MasterSecretKey", c.Stellar.MasterSecretKey},
 		{"Redis.Password", c.Redis.Password},
-		{"Database.URL", c.Database.URL},
+		{"Database.URL", c.Database.URL}, // credentials live in the DSN; there is no separate password field
 		{"YellowCard.WebhookSecret", c.YellowCard.WebhookSecret},
 	}
 
