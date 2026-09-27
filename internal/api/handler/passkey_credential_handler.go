@@ -45,7 +45,8 @@ func (h *PasskeyCredentialHandler) StoreCredential(c *gin.Context) {
 		req.CredentialID, req.PublicKey, req.Counter, pq.Array(req.Transports), req.EmailHash,
 	)
 	if err != nil {
-		logger.Ctx(c.Request.Context()).Error().Err(err).Msg("failed to store passkey credential")
+		lg := logger.Ctx(c.Request.Context())
+		lg.Error().Err(err).Msg("failed to store passkey credential")
 		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to store credential"})
 		return
 	}

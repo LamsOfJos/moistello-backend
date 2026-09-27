@@ -83,10 +83,12 @@ func (s *inviteService) Generate(ctx context.Context, input GenerateInput) (*Inv
 	}
 
 	if err := s.repo.Create(ctx, inv); err != nil {
-		logger.Ctx(ctx).Error().Err(err).Str("circleID", input.CircleID).Msg("failed to create invite")
+		lg := logger.Ctx(ctx)
+		lg.Error().Err(err).Str("circleID", input.CircleID).Msg("failed to create invite")
 		return nil, fmt.Errorf("generating invite: %w", err)
 	}
-	logger.Ctx(ctx).Info().Str("inviteID", inv.ID.String()).Str("circleID", input.CircleID).Msg("invite created")
+	lg := logger.Ctx(ctx)
+	lg.Info().Str("inviteID", inv.ID.String()).Str("circleID", input.CircleID).Msg("invite created")
 	return inv, nil
 }
 
